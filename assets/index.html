@@ -1,0 +1,33 @@
+<html>
+    <title>
+        Inter Communication Between Flutter and JS in an App.
+    </title>
+
+    <body>
+        <h1>
+            Counter in Javascript
+        </h1>
+        <h2>Press the button below to change the counter in Flutter Widget</h2>
+        <button onclick="triggerIncreaseCounterInFlutter()">Increase Count</button>
+      
+    </body>
+
+    <script>
+      var isFlutterConnected = false;
+      window.addEventListener("flutterInAppWebViewPlatformReady", function (
+        event
+      ) {
+        isFlutterConnected = true;
+        console.log("Flutter and Javascript now connected");
+        window.flutter_inappwebview.callHandler("connectionHandler");
+      });
+
+      function triggerIncreaseCounterInFlutter(){
+        if(isFlutterConnected){
+            window.flutter_inappwebview.callHandler("incrementHandler")
+        }else{
+            console.log("Flutter is not connected");
+        }
+      }
+    </script>
+</html
